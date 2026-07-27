@@ -10,6 +10,10 @@
         "DEBUG": "False"
     },
 
+    "build": {
+        "command": "python manage.py collectstatic --noinput"
+    },
+
     "routes": [
         {
             "src": "/(.*)",
