@@ -6,6 +6,10 @@
         }
     ],
 
+    "env": {
+        "DEBUG": "False"
+    },
+
     "routes": [
         {
             "src": "/(.*)",
