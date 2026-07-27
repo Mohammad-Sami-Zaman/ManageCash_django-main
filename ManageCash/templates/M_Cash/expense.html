@@ -1,0 +1,121 @@
+{% extends 'master/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+
+<title>Add Expense</title>
+
+<style>
+
+    body{
+        background: linear-gradient(135deg, #fff5f5, #f8f9fa);
+        min-height: 100vh;
+    }
+
+    .expense-container{
+        max-width: 650px;
+        margin: 60px auto;
+        padding: 20px;
+    }
+
+    .expense-card{
+        background: white;
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        transition: all 0.4s ease;
+    }
+
+    .expense-card:hover{
+        transform: translateY(-8px);
+        box-shadow: 0 25px 55px rgba(0,0,0,0.18);
+    }
+
+    .expense-title{
+        text-align: center;
+        font-size: 38px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 30px;
+    }
+
+    form p{
+        margin-bottom: 20px;
+    }
+
+    form input,
+    form textarea,
+    form select{
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e5e5e5;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus{
+        outline: none;
+        border-color: #dc3545;
+        box-shadow: 0 0 15px rgba(220,53,69,0.25);
+    }
+
+    .submit-btn{
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #dc3545, #ff6b6b);
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .submit-btn:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(220,53,69,0.35);
+    }
+
+    .submit-btn:active{
+        transform: scale(0.97);
+    }
+
+</style>
+
+{% endblock head %}
+
+{% block body %}
+
+<div class="expense-container">
+
+
+<div class="expense-card">
+
+    <h1 class="expense-title">
+        Add Expense
+    </h1>
+
+    <form action="" method="POST">
+
+        {% csrf_token %}
+
+        {{ form_data.as_p }}
+
+        <input
+            class="submit-btn"
+            type="submit"
+            value="Add Expense"
+        >
+
+    </form>
+
+</div>
+
+
+</div>
+
+{% endblock body %}

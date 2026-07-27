@@ -1,0 +1,15 @@
+{
+    "builds": [
+        {
+            "src": "SamiZaman_L4_08_07_ManageCash/wsgi.py",
+            "use": "@vercel/python"
+        }
+    ],
+
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "SamiZaman_L4_08_07_ManageCash/wsgi.py"
+        }
+    ]
+}

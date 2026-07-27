@@ -1,0 +1,265 @@
+{% extends 'master/base.html' %}
+
+{% block head %}
+
+<title>Transaction History</title>
+
+<style>
+
+    body{
+        background: linear-gradient(135deg, #eef2ff, #f8f9fa);
+        min-height: 100vh;
+    }
+
+    .container{
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    .page-title{
+        text-align: center;
+        font-size: 42px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 40px;
+    }
+
+    /* Summary Cards */
+
+    .summary-card{
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+
+    .card{
+        flex: 1;
+        min-width: 280px;
+        padding: 30px;
+        border: none;
+        border-radius: 20px;
+        background: white;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        text-align: center;
+        transition: all .4s ease;
+        cursor: pointer;
+    }
+
+    .card:hover{
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    }
+
+    .card h3{
+        margin-bottom: 15px;
+        color: #666;
+        font-size: 24px;
+    }
+
+    .card h2{
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    /* Transaction Table */
+
+    .table-card{
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead{
+        background: linear-gradient(135deg, #0d6efd, #6f42c1);
+        color: white;
+    }
+
+    table th{
+        padding: 18px;
+        font-size: 17px;
+    }
+
+    table td{
+        padding: 18px;
+        text-align: center;
+        border-bottom: 1px solid #f1f1f1;
+        transition: .3s;
+    }
+
+    tbody tr{
+        transition: all .3s ease;
+    }
+
+    tbody tr:hover{
+        background-color: #f8f9ff;
+        transform: scale(1.01);
+    }
+
+    /* Income Badge */
+
+    .income{
+        display: inline-block;
+        padding: 8px 15px;
+        background: #d1f7dd;
+        color: #198754;
+        border-radius: 50px;
+        font-weight: 600;
+    }
+
+    /* Expense Badge */
+
+    .expense{
+        display: inline-block;
+        padding: 8px 15px;
+        background: #ffe1e3;
+        color: #dc3545;
+        border-radius: 50px;
+        font-weight: 600;
+    }
+
+    /* Empty Message */
+
+    .empty-message{
+        padding: 25px;
+        font-size: 18px;
+        color: gray;
+        text-align: center;
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+        .page-title{
+            font-size: 32px;
+        }
+
+        .card{
+            width: 100%;
+        }
+
+        table{
+            font-size: 14px;
+        }
+
+        table th,
+        table td{
+            padding: 12px;
+        }
+
+    }
+
+</style>
+
+{% endblock head %}
+
+{% block body %}
+
+<div class="container">
+
+```
+<h1 class="page-title">
+    Transaction History
+</h1>
+
+
+<div class="summary-card">
+
+    <div class="card">
+        <h3>Total Income</h3>
+        <h2>{{ total_income }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Expense</h3>
+        <h2>{{ total_expense }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Current Balance</h3>
+        <h2>{{ balance }}</h2>
+    </div>
+
+</div>
+
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>Date & Time</th>
+                <th>Transaction Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            {% for transaction in transactions %}
+
+            <tr>
+
+                <td>{{ forloop.counter }}</td>
+
+                <td>
+                    {{ transaction.transaction_date }}
+                </td>
+
+                <td>
+
+                    {% if transaction.transaction_type == 'Income' %}
+
+                    <span class="income">
+                        {{ transaction.transaction_type }}
+                    </span>
+
+                    {% else %}
+
+                    <span class="expense">
+                        {{ transaction.transaction_type }}
+                    </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ transaction.amount }}</td>
+
+                <td>{{ transaction.description }}</td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="5" class="empty-message">
+                    No Transactions Found.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+```
+
+</div>
+
+{% endblock body %}
