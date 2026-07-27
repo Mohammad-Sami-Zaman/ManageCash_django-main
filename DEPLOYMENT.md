@@ -8,6 +8,7 @@ Deployment notes for Vercel
 
 3) Requirements
    - requirements.txt has the core packages. Vercel will install these automatically during build.
+   - The repo includes a [runtime.txt](runtime.txt) file to pin the Python version used by Vercel. Django 6 needs a recent Python runtime, so keep this file in place.
 
 4) Static files
    - The project uses whitenoise. Ensure collectstatic runs if needed. On Vercel you can run collectstatic during the build step by adding a Build Command in the Vercel UI such as:
