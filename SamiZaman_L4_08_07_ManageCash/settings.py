@@ -149,3 +149,7 @@ DEBUG = os.environ.get("DEBUG","False") == "True"
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://managecash-django.onrender.com",
+]
